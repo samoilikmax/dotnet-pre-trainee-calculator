@@ -61,36 +61,49 @@ namespace Calculator
             double firstNumber, secondNumber;
             char operand;
 
-            firstNumber = GetValidNumber("Enter the first number: ");
-            operand = GetvalidOperand();
-            secondNumber = GetValidNumber("Enter the second number: ");
+            bool userChoice = true;
 
-            double result = 0;
-            bool isCalculationValid = true;
-
-            switch (operand)
+            while (userChoice)
             {
-                case '+': result = Calculator.Addition(firstNumber, secondNumber); break;
-                case '-': result = Calculator.Subtraction(firstNumber,secondNumber); break;
-                case '*': result = Calculator.Multiplication(firstNumber, secondNumber); break;
+                firstNumber = GetValidNumber("Enter the first number: ");
+                operand = GetvalidOperand();
+                secondNumber = GetValidNumber("Enter the second number: ");
 
-                case '/':
-                    if(secondNumber == 0)
-                    {
-                        Console.WriteLine("Error! Division by zero is not allowed.");
-                        isCalculationValid = false;
-                    }
-                    else
-                    {
-                        result = firstNumber / secondNumber;
-                    }
-                    break;
+                double result = 0;
+                bool isCalculationValid = true;
+
+                switch (operand)
+                {
+                    case '+': result = Calculator.Addition(firstNumber, secondNumber); break;
+                    case '-': result = Calculator.Subtraction(firstNumber, secondNumber); break;
+                    case '*': result = Calculator.Multiplication(firstNumber, secondNumber); break;
+
+                    case '/':
+                        if (secondNumber == 0)
+                        {
+                            Console.WriteLine("Error! Division by zero is not allowed.");
+                            isCalculationValid = false;
+                        }
+                        else
+                        {
+                            result = Calculator.Division(firstNumber, secondNumber);
+                        }
+                        break;
+                }
+
+                if (isCalculationValid)
+                {
+                    Console.WriteLine($"Result: {firstNumber} {operand} {secondNumber} = {result}");
+                }
+
+                Console.WriteLine("Do you want to continue? (y/n)");
+                string userInput = Console.ReadLine();
+                if(userInput != "y")
+                {
+                    userChoice = false;
+                }
             }
 
-            if (isCalculationValid)
-            {
-                Console.WriteLine($"Result: {firstNumber} {operand} {secondNumber} = {result}");
-            }
         }
     }
 }
