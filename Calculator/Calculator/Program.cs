@@ -4,22 +4,22 @@ namespace Calculator
 {
     internal class Calculator
     {
-        internal int Addition(int x, int y)
+        public static double Addition(double x, double y)
         {
             return x + y;
         }
 
-        internal int Subtraction(int x, int y)
+        public static double Subtraction(double x, double y)
         {
             return x - y;
         }
 
-        internal int Multiplication(int x, int y)
+        public static double Multiplication(double x, double y)
         {
             return x * y;
         }
 
-        internal int Division(int x, int y)
+        public static double Division(double x, double y)
         {
             return x / y;
         }
@@ -64,6 +64,33 @@ namespace Calculator
             firstNumber = GetValidNumber("Enter the first number: ");
             operand = GetvalidOperand();
             secondNumber = GetValidNumber("Enter the second number: ");
+
+            double result = 0;
+            bool isCalculationValid = true;
+
+            switch (operand)
+            {
+                case '+': result = Calculator.Addition(firstNumber, secondNumber); break;
+                case '-': result = Calculator.Subtraction(firstNumber,secondNumber); break;
+                case '*': result = Calculator.Multiplication(firstNumber, secondNumber); break;
+
+                case '/':
+                    if(secondNumber == 0)
+                    {
+                        Console.WriteLine("Error! Division by zero is not allowed.");
+                        isCalculationValid = false;
+                    }
+                    else
+                    {
+                        result = firstNumber / secondNumber;
+                    }
+                    break;
+            }
+
+            if (isCalculationValid)
+            {
+                Console.WriteLine($"Result: {firstNumber} {operand} {secondNumber} = {result}");
+            }
         }
     }
 }
