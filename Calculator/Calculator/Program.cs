@@ -28,7 +28,7 @@ namespace Calculator
     }
     internal class Program
     {
-        static double GetvalidNumber(string message)
+        static double GetValidNumber(string message)
         {
             double number;
             Console.Write(message);
@@ -41,12 +41,29 @@ namespace Calculator
 
             return number;
         }
+
+        static char GetvalidOperand()
+        {
+            char op;
+
+            Console.Write("Chose an operation (+ , -, * or /): ");
+
+            while (!char.TryParse(Console.ReadLine(), out op) || (op != '+' && op != '-' && op != '*' && op != '/'))
+            {
+                Console.WriteLine("Error! Unknown operation!");
+                Console.Write("Chose an operation (+ , -, * or /): ");
+            }
+
+            return op;
+        }
         static void Main(string[] args)
         {
             double firstNumber, secondNumber;
             char operand;
 
-            
+            firstNumber = GetValidNumber("Enter the first number: ");
+            operand = GetvalidOperand();
+            secondNumber = GetValidNumber("Enter the second number: ");
         }
     }
 }
